@@ -1,173 +1,71 @@
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080808">
-<title>KM PLAY | Tu entretenimiento</title>
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050916"><title>KM PLAY | Películas, series y TV</title>
 <style>
-:root{--red:#ff1735;--bg:#080808;--panel:#171717;--muted:#aaa}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:white;font-family:Arial,sans-serif}
-button,input{font:inherit}
-button{cursor:pointer}
-header{padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;background:#090909;position:sticky;top:0;z-index:5;border-bottom:1px solid #252525}
-.logo{font-size:29px;font-weight:900;font-style:italic;letter-spacing:-2px}
-.logo span{color:var(--red)}
-nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-nav a{color:#ddd;text-decoration:none;font-size:14px}
-nav a:hover{color:var(--red)}
-.btn{border:0;border-radius:7px;padding:11px 16px;background:var(--red);color:white;font-weight:bold}
-.btn.secondary{background:#262626;border:1px solid #444}
-.hero{min-height:370px;padding:65px 6%;display:flex;align-items:center;background:radial-gradient(ellipse at 80% 40%,#661020 0%,#261017 25%,#111 60%,#080808 100%)}
-.hero-content{max-width:590px}
-.tag{color:#ff5369;font-weight:bold;letter-spacing:2px;font-size:12px}
-h1{font-size:clamp(38px,7vw,66px);margin:15px 0;line-height:1}
-.hero p{color:#ddd;line-height:1.6;max-width:470px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-section{padding:24px 5%}
-.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
-h2{font-size:22px}
-.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}
-.card{min-width:0;border-radius:9px;overflow:hidden;background:var(--panel);border:1px solid #292929;transition:transform .2s}
-.card:hover{transform:translateY(-4px)}
-.poster{height:150px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:20px;font-weight:900;background:linear-gradient(145deg,#5c1023,#151515 75%)}
-.poster.two{background:linear-gradient(145deg,#0d4865,#141414)}
-.poster.three{background:linear-gradient(145deg,#654119,#171717)}
-.poster.four{background:linear-gradient(145deg,#32235e,#101010)}
-.poster.five{background:linear-gradient(145deg,#174b36,#111)}
-.card-info{padding:11px;font-size:13px}
-.card-info small{color:var(--muted)}
-.live{display:inline-block;background:var(--red);padding:4px 7px;border-radius:4px;font-size:10px;margin-bottom:8px}
-.channels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.channel{background:#171717;border:1px solid #333;border-radius:8px;text-align:center;padding:20px 6px;font-weight:bold}
-.channel span{display:block;color:var(--red);font-size:20px;margin-bottom:8px}
-.price{background:linear-gradient(140deg,#1b1b1b,#101010);border:1px solid #383838;border-radius:12px;padding:26px;max-width:500px;margin:auto;text-align:center}
-.price strong{font-size:35px;display:block;margin:15px}
-.price ul{list-style:none;padding:0;line-height:2;color:#ddd}
-footer{text-align:center;color:#999;padding:30px 15px;border-top:1px solid #292929;font-size:13px}
-.modal{display:none;position:fixed;inset:0;background:#000d;z-index:10;align-items:center;justify-content:center;padding:18px}
-.modal-box{width:100%;max-width:400px;background:#171717;padding:25px;border:1px solid #444;border-radius:12px}
-.modal-box input{display:block;width:100%;padding:13px;margin:12px 0;background:#090909;border:1px solid #444;color:white;border-radius:6px}
-.modal-box .btn{width:100%;margin-top:8px}
-.close{float:right;background:none;color:white;border:0;font-size:24px}
-#notice{color:#ff9aaa;font-size:13px;line-height:1.5}
-@media(max-width:750px){header{flex-wrap:wrap}nav{order:3;width:100%;justify-content:space-between;gap:10px}nav a{font-size:12px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.poster{height:145px}.hero{min-height:340px;padding:45px 6%}.channels{grid-template-columns:repeat(2,minmax(0,1fr))}}
-</style>
-</head>
+/* Pantalla de bienvenida KMPlay */
+#kmplay-splash{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#050505;color:#fff;transition:opacity .65s ease,visibility .65s ease}
+#kmplay-splash.splash-hide{opacity:0;visibility:hidden;pointer-events:none}
+.splash-symbol{width:112px;height:94px;border:5px solid #ed101d;border-radius:28px;display:grid;place-items:center;transform:skewY(0deg);box-shadow:0 0 24px #ed101d88,inset 0 0 18px #ed101d33;animation:splash-pulse 1.4s ease-in-out infinite alternate}
+.splash-symbol span{font-size:48px;color:white;margin-left:7px;text-shadow:0 0 15px #fff}
+.splash-name{font-size:clamp(46px,12vw,76px);font-weight:950;letter-spacing:-3px;line-height:1}
+.splash-name b{color:#ed101d}.splash-tagline{font-size:11px;letter-spacing:2px;color:#d5d5d5;text-align:center;padding:0 20px}
+.splash-track{width:min(65vw,360px);height:5px;border-radius:9px;background:#292929;overflow:hidden;margin-top:12px}.splash-track i{display:block;width:0;height:100%;background:#ed101d;box-shadow:0 0 12px #ed101d;animation:splash-load 2.2s ease forwards}
+@keyframes splash-load{to{width:100%}}@keyframes splash-pulse{from{box-shadow:0 0 12px #ed101d55,inset 0 0 10px #ed101d22}to{box-shadow:0 0 32px #ed101daa,inset 0 0 22px #ed101d55}}
+@media(prefers-reduced-motion:reduce){.splash-symbol,.splash-track i{animation:none}.splash-track i{width:100%}}
+
+:root{--bg:#080808;--panel:#171717;--line:#303030;--text:#f5f5f5;--muted:#b3b3b3;--blue:#e50914;--violet:#b20710;--green:#e50914}
+*{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 0 0,#142d61,transparent 45%),radial-gradient(ellipse at 100% 100%,#28124b,transparent 38%),var(--bg);font:16px system-ui,sans-serif}header{max-width:1050px;margin:auto;padding:22px 18px;display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--violet));display:grid;place-items:center;font-size:28px}.brand{font-size:24px;font-weight:900}.brand span{color:var(--blue)}main{max-width:1050px;margin:auto;padding:24px 18px 55px}.tag{display:inline-block;border:1px solid #285477;background:#0d1d36;color:#83dcff;border-radius:99px;padding:9px 14px;font-size:12px;font-weight:800;letter-spacing:1px}h1{font-size:clamp(36px,7vw,64px);line-height:1.03;margin:22px 0 14px;letter-spacing:-2px}h1 span{color:var(--blue)}p{color:var(--muted);line-height:1.65}.columns{display:grid;grid-template-columns:1fr .9fr;gap:22px;align-items:start;margin-top:28px}.panel{border:1px solid var(--line);border-radius:23px;padding:24px;background:linear-gradient(145deg,#111e38ed,#0a1224ed);box-shadow:0 22px 60px #0003}.panel h2{margin:0 0 8px;font-size:25px}.field{display:grid;gap:7px;margin:14px 0}label{font-size:13px;color:#dce7ff;font-weight:700}input{width:100%;padding:14px;border-radius:12px;background:#070f20;border:1px solid #2c4165;color:white;font:inherit;outline:none}input:focus{border-color:var(--blue)}button{border:0;border-radius:12px;padding:14px 16px;width:100%;background:linear-gradient(100deg,var(--violet),#167fff,var(--blue));color:white;font:inherit;font-weight:850;cursor:pointer;margin-top:9px}.secondary{background:#142441;border:1px solid #2a4166}.tabs{display:flex;gap:8px;margin:16px 0}.tabs button{width:auto;flex:1;margin:0;padding:11px}.tabs button.active{outline:2px solid #36bfff}.plan{border:1px solid #31507a;border-radius:18px;padding:19px;margin-top:18px;background:#0b1830}.plan .name{font-weight:850;font-size:20px}.price{font-size:36px;font-weight:900;margin:8px 0}.price small{font-size:13px;color:var(--muted);font-weight:500}.features{padding:0;list-style:none;line-height:2;color:#d8e5ff}.features li:before{content:"✓";color:var(--green);font-weight:900;margin-right:10px}.notice{font-size:12px;color:#ffdda0;background:#302511;border:1px solid #6b5128;padding:12px;border-radius:12px;margin-top:14px}.status{display:none;border:1px solid #2a5873;border-radius:12px;padding:12px;margin-top:12px;color:#9ee5ff;background:#0b2034;overflow-wrap:anywhere}.hide{display:none!important}footer{text-align:center;color:#7183a2;font-size:12px;padding:24px}@media(max-width:760px){.columns{grid-template-columns:1fr}.panel{padding:20px}header{padding:17px}}
+
+.price{display:block!important;visibility:visible!important;opacity:1!important;color:#ffffff!important;font-size:clamp(32px,5vw,42px)!important;font-weight:900!important;line-height:1.2!important;margin:12px 0!important;overflow:visible!important}
+.price small{display:inline!important;visibility:visible!important;opacity:1!important;color:#c7d7f3!important;font-size:13px!important;font-weight:600!important}
+.price-banner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin:22px 0 8px;padding:16px 18px;border:2px solid #25bfff;border-radius:16px;background:linear-gradient(100deg,#111e38,#192b50);color:#f5f7ff;font-weight:800;font-size:17px;text-align:center;box-shadow:0 8px 30px #0004}
+.price-banner strong{display:inline-block;color:#ffffff!important;font-size:clamp(28px,5vw,38px)!important;font-weight:950!important;line-height:1.1}
+.price-banner span{color:#b9c9e5;font-size:14px;font-weight:700}
+
+
+/* KM PLAY: tema rojo y negro inspirado en plataformas de streaming */
+body{background:radial-gradient(ellipse at 0 0,#260508,transparent 42%),#080808!important;color:#f5f5f5!important}
+header{background:#080808!important}
+.logo{background:linear-gradient(135deg,#e50914,#8b0000)!important;color:#fff!important}
+.brand span,.tag{color:#e50914!important}
+.panel,.plan{background:#141414!important;border-color:#333!important}
+.price-banner{border-color:#e50914!important;background:linear-gradient(100deg,#1a0809,#171717)!important;box-shadow:0 8px 30px #e5091422!important}
+.price-banner strong,.price{color:#e50914!important}
+button:not(.secondary),#payBtn,#submitBtn{background:#e50914!important;color:#fff!important;border-color:#e50914!important}
+.tabs button.active{outline-color:#e50914!important}
+.secondary{background:#262626!important;border-color:#444!important;color:#fff!important}
+input{background:#101010!important;border-color:#383838!important;color:#fff!important}
+.splash-symbol{border-color:#e50914!important;box-shadow:0 0 24px #e5091488,inset 0 0 18px #e5091433!important}
+.splash-name b{color:#e50914!important}.splash-track i{background:#e50914!important;box-shadow:0 0 12px #e50914!important}
+.splash-symbol span{color:#fff!important}
+footer{border-color:#292929!important}
+
+</style></head>
 <body>
-<header>
-  <div class="logo">KM<span>▶PLAY</span></div>
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#peliculas">Películas</a>
-    <a href="#series">Series</a>
-    <a href="#futbol">Fútbol en vivo</a>
-    <a href="#tv">TV en vivo</a>
-  </nav>
-  <button class="btn" onclick="openLogin()">Mi cuenta</button>
-</header>
-
-<main>
-<section class="hero" id="inicio">
- <div class="hero-content">
-  <div class="tag">BIENVENIDO A KM PLAY</div>
-  <h1>Tu próximo<br>entretenimiento.</h1>
-  <p>Películas, series, deportes y televisión en un solo lugar. Todo desde tus dispositivos favoritos.</p>
-  <div class="actions">
-   <button class="btn" onclick="document.querySelector('#planes').scrollIntoView({behavior:'smooth'})">Ver suscripción</button>
-   <button class="btn secondary" onclick="openLogin()">Iniciar sesión</button>
-  </div>
- </div>
-</section>
-
-<section id="peliculas">
- <div class="section-title"><h2>🎬 Películas</h2></div>
- <div class="cards">
-  <article class="card"><div class="poster">ACCIÓN</div><div class="card-info">Noche de acción<br><small>Acción · Aventura</small></div></article>
-  <article class="card"><div class="poster two">AVENTURA</div><div class="card-info">Nuevos mundos<br><small>Aventura · Fantasía</small></div></article>
-  <article class="card"><div class="poster three">CINE</div><div class="card-info">Grandes historias<br><small>Drama · Estrenos</small></div></article>
-  <article class="card"><div class="poster four">SUSPENSO</div><div class="card-info">La última misión<br><small>Suspenso · Acción</small></div></article>
-  <article class="card"><div class="poster five">FAMILIA</div><div class="card-info">Diversión en casa<br><small>Familiar · Comedia</small></div></article>
- </div>
-</section>
-
-<section id="series">
- <div class="section-title"><h2>📺 Series</h2></div>
- <div class="cards">
-  <article class="card"><div class="poster four">MISTERIO</div><div class="card-info">Secretos ocultos<br><small>Serie · Misterio</small></div></article>
-  <article class="card"><div class="poster two">EL VIAJE</div><div class="card-info">El viaje<br><small>Serie · Aventura</small></div></article>
-  <article class="card"><div class="poster five">EL EQUIPO</div><div class="card-info">El equipo<br><small>Serie · Drama</small></div></article>
-  <article class="card"><div class="poster three">DESTINO</div><div class="card-info">Destino final<br><small>Serie · Suspenso</small></div></article>
-  <article class="card"><div class="poster">COMEDIA</div><div class="card-info">Entre amigos<br><small>Serie · Comedia</small></div></article>
- </div>
-</section>
-
-<section id="futbol">
- <div class="section-title"><h2>⚽ Fútbol en vivo</h2></div>
- <div class="cards">
-  <article class="card"><div class="poster two"><span><span class="live">EN VIVO · DEMO</span><br>⚽<br>FÚTBOL</span></div><div class="card-info">Partidos en vivo<br><small>Disponible al conectar el proveedor</small></div></article>
-  <article class="card"><div class="poster four">🏆<br>TORNEOS</div><div class="card-info">Copas y torneos<br><small>Contenido autorizado</small></div></article>
- </div>
-</section>
-
-<section id="tv">
- <div class="section-title"><h2>📡 TV en vivo</h2></div>
- <div class="channels">
-  <div class="channel"><span>TV</span>Canal 1</div>
-  <div class="channel"><span>TV</span>Canal 2</div>
-  <div class="channel"><span>TV</span>Canal 3</div>
-  <div class="channel"><span>TV</span>Canal 4</div>
- </div>
- <p style="color:#999;font-size:13px">Canales de muestra. La transmisión real requiere integrar una fuente autorizada.</p>
-</section>
-
-<section id="planes">
- <div class="price">
-  <div class="tag">PLAN MENSUAL</div>
-  <h2>Tu entretenimiento, en un solo lugar</h2>
-  <strong>$20.000 <small style="font-size:14px">ARS / mes</small></strong>
-  <ul>
-   <li>✓ Películas y series autorizadas</li>
-   <li>✓ Deportes y TV, según disponibilidad</li>
-   <li>✓ Acceso desde dispositivos compatibles</li>
-  </ul>
-  <button class="btn" onclick="openLogin()">Crear mi cuenta</button>
-  <p style="color:#999;font-size:12px">La suscripción y los pagos reales deben configurarse antes del lanzamiento.</p>
- </div>
-</section>
-</main>
-
-<footer>
- <div class="logo">KM<span>▶PLAY</span></div>
- <p>Tu entretenimiento en un solo lugar.</p>
- <p>© 2026 KM PLAY · Todos los derechos reservados.</p>
-</footer>
-
-<div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-label="Acceso a KM PLAY">
- <div class="modal-box">
-  <button class="close" onclick="closeLogin()" aria-label="Cerrar">×</button>
-  <div class="logo">KM<span>▶PLAY</span></div>
-  <h2>Acceder a mi cuenta</h2>
-  <form onsubmit="demoLogin(event)">
-   <input type="text" placeholder="Usuario o correo" required>
-   <input type="password" placeholder="Contraseña" required>
-   <button class="btn" type="submit">Continuar</button>
-  </form>
-  <p id="notice">Demostración visual: todavía no se crean ni verifican cuentas reales.</p>
- </div>
+<div id="kmplay-splash" role="status" aria-label="Bienvenido a KMPlay">
+  <div class="splash-symbol" aria-hidden="true"><span>▶</span></div>
+  <div class="splash-name"><b>KM</b>Play</div>
+  <div class="splash-tagline">TU ENTRETENIMIENTO, EN UN SOLO LUGAR</div>
+  <div class="splash-track" aria-hidden="true"><i></i></div>
 </div>
-
+<header><div class="logo">▷</div><div class="brand">KM <span>PLAY</span><div style="font-size:11px;color:#a9b7d1;letter-spacing:1px">PORTAL DE CLIENTES</div></div></header>
+<main><span class="tag">● TU ENTRETENIMIENTO, EN UN SOLO LUGAR</span><h1>Películas, series<br>y TV en vivo con <span>KM PLAY.</span></h1><p>Creá tu cuenta, contratá el abono mensual y accedé al contenido autorizado incluido en tu suscripción.</p>
+<div class="price-banner" aria-label="Precio de la suscripción KM PLAY">KM PLAY Mensual <strong>$20.000</strong> <span>ARS / mes</span></div>
+<div class="columns"><section class="panel"><h2 id="formTitle">Crear cuenta</h2><p id="formSub">Registrate para comenzar tu suscripción mensual.</p>
+<div class="tabs"><button class="active" id="tabRegister" type="button">Registrarme</button><button class="secondary" id="tabLogin" type="button">Ingresar</button></div>
+<form id="accountForm"><div id="registerFields"><div class="field"><label for="fullName">Nombre</label><input id="fullName" autocomplete="name" required maxlength="80" placeholder="Tu nombre"></div><div class="field"><label for="email">Correo electrónico</label><input id="email" type="email" autocomplete="email" required maxlength="120" placeholder="vos@correo.com"></div></div>
+<div class="field"><label for="username">Usuario</label><input id="username" required maxlength="40" autocomplete="username" placeholder="Elegí un usuario"></div><div class="field"><label for="password">Contraseña</label><input id="password" type="password" required minlength="8" maxlength="128" autocomplete="new-password" placeholder="Mínimo 8 caracteres"></div>
+<button type="submit" id="submitBtn">Crear cuenta de demostración</button></form><div class="status" id="accountStatus" role="status"></div>
+<div class="notice"><b>Modo de prueba:</b> el registro se guarda solo en este navegador. No uses una contraseña real. Para activar cuentas de verdad falta conectar servidor, autenticación segura y base de datos.</div>
+</section>
+<aside class="panel"><h2>Tu abono mensual</h2><p>Un plan para acceder al contenido incluido durante la vigencia de tu suscripción.</p><div class="plan"><div class="name">KM PLAY Mensual</div><div class="price">$20.000 <small>ARS / mes</small></div><ul class="features"><li>Películas y series autorizadas</li><li>Canales de TV en vivo autorizados</li><li>Eventos deportivos disponibles en el plan</li><li>Cuenta personal</li><li>Estado de suscripción en tu perfil</li></ul><button id="payBtn" type="button">Continuar al pago</button><div class="status" id="payStatus" role="status"></div></div><p style="font-size:12px">Los contenidos concretos dependen de las licencias y de la conexión técnica con el proveedor.</p></aside></div></main>
+<footer>© 2026 KM PLAY · Portal de suscripción</footer>
 <script>
-const modal=document.getElementById('loginModal');
-function openLogin(){modal.style.display='flex'}
-function closeLogin(){modal.style.display='none'}
-modal.addEventListener('click',e=>{if(e.target===modal)closeLogin()});
-function demoLogin(e){
- e.preventDefault();
- document.getElementById('notice').textContent='El acceso real todavía debe conectarse a un sistema seguro de usuarios.';
-}
-</script>
-</body>
-</html>
+const $=id=>document.getElementById(id);
+const splash=$('kmplay-splash');window.setTimeout(()=>splash&&splash.classList.add('splash-hide'),2400);window.setTimeout(()=>splash&&splash.remove(),3200);
+const KEY='kmplay_monthly_demo_users_v1';let mode='register';const status=$('accountStatus');
+function getUsers(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function setMode(next){mode=next;$('tabRegister').classList.toggle('active',mode==='register');$('tabLogin').classList.toggle('active',mode==='login');$('tabLogin').classList.toggle('secondary',mode!=='login');$('tabRegister').classList.toggle('secondary',mode!=='register');$('registerFields').classList.toggle('hide',mode==='login');$('fullName').required=mode==='register';$('email').required=mode==='register';$('formTitle').textContent=mode==='register'?'Crear cuenta':'Bienvenido de nuevo';$('formSub').textContent=mode==='register'?'Registrate para comenzar tu suscripción mensual.':'Ingresá con tu usuario y contraseña.';$('submitBtn').textContent=mode==='register'?'Crear cuenta de demostración':'Ingresar (demo)';$('password').autocomplete=mode==='register'?'new-password':'current-password';status.style.display='none'}
+$('tabRegister').onclick=()=>setMode('register');$('tabLogin').onclick=()=>setMode('login');
+$('accountForm').addEventListener('submit',e=>{e.preventDefault();const users=getUsers(),username=$('username').value.trim(),password=$('password').value;if(mode==='register'){if(users.some(u=>u.username.toLowerCase()===username.toLowerCase())){status.textContent='Ese usuario ya existe en esta demostración.';status.style.display='block';return}users.push({name:$('fullName').value.trim(),email:$('email').value.trim(),username,password,subscription:'pendiente de pago',createdAt:new Date().toISOString()});localStorage.setItem(KEY,JSON.stringify(users));status.textContent='Cuenta demo creada. Tu suscripción está pendiente: el pago todavía no está conectado.'}else{const u=users.find(x=>x.username===username&&x.password===password);status.textContent=u?'Acceso demo correcto. Estado de suscripción: '+u.subscription+'.':'No se encontró la cuenta demo en este navegador.'}status.style.display='block'});
+$('payBtn').onclick=()=>{const s=$('payStatus');s.textContent='El abono mensual cuesta $20.000 ARS. Mercado Pago aún no está conectado. Para cobrar de verdad hay que configurar la cuenta del vendedor, el checkout y la notificación segura de pagos aprobados.';s.style.display='block'};
+</script></body></html>
